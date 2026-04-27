@@ -1,0 +1,205 @@
+.section {
+  background-color: #ffffff;
+  padding: 8rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: var(--container-max-width, 1280px);
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+/* Beautiful soft background glows */
+.section::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: -5%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section::after {
+  content: '';
+  position: absolute;
+  bottom: -10%;
+  right: -5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(15, 23, 42, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+}
+
+/* ── Left Side Content ── */
+.contentSide {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.overtitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #7C0A02;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  padding: 0.4rem 1.2rem;
+  background-color: rgba(239, 68, 68, 0.08);
+  border-radius: 50px;
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  color: #0f172a;
+  margin-bottom: 1.5rem;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.accent {
+  background: linear-gradient(90deg, #7C0A02, #7C0A02);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.description {
+  font-size: 1.15rem;
+  color: #64748b;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  max-width: 550px;
+}
+
+.ctaButton {
+  margin-top: 2rem;
+  padding: 1.1rem 2.8rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(90deg, #7C0A02, #7C0A02);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.3);
+}
+
+.ctaButton:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px -5px rgba(239, 68, 68, 0.4);
+}
+
+/* ── Right Side Cards ── */
+.cardsSide {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 24px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.03);
+}
+
+/* Subtle glow inside the card on hover */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at left center, rgba(239, 68, 68, 0.03), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+}
+
+.card:hover {
+  transform: translateX(15px);
+  border-color: rgba(239, 68, 68, 0.2);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.iconWrapper {
+  flex-shrink: 0;
+  width: 70px;
+  height: 70px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1.5rem;
+  color: #7C0A02;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  z-index: 1;
+}
+
+.card:hover .iconWrapper {
+  transform: scale(1.1) rotate(5deg);
+  background: linear-gradient(135deg, #7C0A02 0%, #7C0A02 100%);
+  color: #ffffff;
+  box-shadow: 0 10px 20px rgba(239, 68, 68, 0.2);
+}
+
+.featureIcon {
+  width: 30px;
+  height: 30px;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+.cardTitle {
+  font-size: 1.35rem;
+  color: #0f172a;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.cardDesc {
+  font-size: 0.95rem;
+  color: #64748b;
+  line-height: 1.6;
+}

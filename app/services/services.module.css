@@ -1,0 +1,272 @@
+.pageWrapper {
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: var(--container-max-width, 1280px);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ── Modern Asymmetric Hero ── */
+.hero {
+  padding: 12rem 0 8rem 0;
+  background-color: #fcfcfc;
+  position: relative;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .heroGrid {
+    grid-template-columns: 1.2fr 1fr;
+    text-align: left;
+  }
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(239, 68, 68, 0.08);
+  color: #7C0A02;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 2rem;
+}
+
+.heroTitle {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: #0f172a;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin-bottom: 2rem;
+}
+
+.redText {
+  color: #7C0A02;
+}
+
+.heroSubtitle {
+  font-size: 1.25rem;
+  color: #64748b;
+  line-height: 1.8;
+  margin-bottom: 3rem;
+  max-width: 600px;
+}
+
+.heroActions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.primaryBtn {
+  padding: 1.25rem 2.5rem;
+  background: #0f172a;
+  color: #ffffff;
+  border-radius: 50px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.primaryBtn:hover {
+  background: #7C0A02;
+  transform: translateY(-3px);
+}
+
+.trustedBy {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Hero Visual Elements */
+.heroVisual {
+  position: relative;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroImage {
+  object-fit: cover;
+  border-radius: 40px;
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Zig-Zag List Section ── */
+.listSection {
+  padding: 8rem 0;
+}
+
+.serviceRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 10rem;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 1024px) {
+  .serviceRow {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .reverse {
+    direction: rtl;
+  }
+  
+  .reverse > * {
+    direction: ltr;
+  }
+}
+
+.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.serviceImageCol {
+  position: relative;
+}
+
+.imageOverlay {
+  aspect-ratio: 16/10;
+  background-color: #f8fafc;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #f1f5f9;
+}
+
+.imageOverlay::before {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: var(--color);
+  filter: blur(100px);
+  opacity: 0.1;
+}
+
+.largeIcon {
+  color: var(--color);
+  transition: all 0.5s ease;
+}
+
+.serviceImg {
+  object-fit: cover;
+}
+
+.serviceContentCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.rowSubtitle {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #7C0A02;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.rowTitle {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.rowDescription {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #64748b;
+}
+
+.featureList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.featureItem {
+  padding: 0.4rem 1rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.learnMoreLink {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 800;
+  color: #0f172a;
+  text-decoration: none;
+  margin-top: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.learnMoreLink:hover {
+  color: #7C0A02;
+  gap: 1.5rem;
+}
+
+/* Animations */
+@keyframes morph {
+  0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+  33% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+  66% { border-radius: 50% 50% 30% 70% / 50% 60% 40% 40%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(-50%, -50%); }
+  50% { transform: translate(-50%, -60%); }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 8rem 0 4rem 0;
+  }
+  
+  .heroActions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+  }
+  
+  .serviceRow {
+    margin-bottom: 6rem;
+  }
+  
+  .imageOverlay {
+    aspect-ratio: 1/1;
+  }
+}

@@ -1,0 +1,551 @@
+.pageWrapper {
+  background-color: #ffffff;
+  color: #1a1a1a;
+  min-height: 100vh;
+  padding-top: 0;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Immersive Hero Section */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: #000;
+  overflow: hidden;
+}
+
+.heroBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.heroBackground img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+}
+
+.heroOverlay {
+  display: none;
+}
+
+.introBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #800000;
+  color: #ffffff;
+  padding: 0.75rem 2rem;
+  border-radius: 100px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.introTitle {
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-weight: 900;
+  margin-bottom: 2.5rem;
+  letter-spacing: -2px;
+  color: #1a1a1a;
+}
+
+/* Intro Section */
+.introSection {
+  padding: 8rem 0 4rem;
+  background: #ffffff;
+}
+
+.introContent {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mainDescription {
+  font-size: 1.75rem;
+  line-height: 1.6;
+  color: #1a1a1a;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+/* Bento Stats Section */
+.statsSection {
+  padding: 6rem 0 10rem;
+  position: relative;
+  z-index: 3;
+}
+
+.bentoGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 250px);
+  gap: 2rem;
+}
+
+.bentoItem {
+  background: #ffffff;
+  border: 1px solid #eee;
+  border-radius: 40px;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.bentoItem:hover {
+  transform: translateY(-10px);
+  border-color: #800000;
+  box-shadow: 0 40px 80px rgba(128, 0, 0, 0.08);
+}
+
+.largeCard {
+  grid-column: span 2;
+  grid-row: span 2;
+  background: #800000;
+  color: #ffffff;
+}
+
+.statValue {
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+}
+
+.statDesc {
+  font-size: 1.1rem;
+  opacity: 0.7;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Immersive Story Section with FLIP CARD */
+.immersiveStory {
+  padding: 12rem 0;
+  background: #0a0a0a;
+  color: #ffffff;
+}
+
+.storyLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10rem;
+  align-items: center;
+}
+
+.textSection h2 {
+  font-size: 4.5rem;
+  font-weight: 800;
+  margin-bottom: 3rem;
+  line-height: 1;
+  background: linear-gradient(to right, #ffffff, #666);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.textSection p {
+  font-size: 1.3rem;
+  line-height: 1.8;
+  opacity: 0.8;
+  margin-bottom: 3rem;
+}
+
+.imageShowcase {
+  perspective: 1500px;
+}
+
+.flipCard {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.4 / 1;
+  cursor: pointer;
+}
+
+.flipCardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.flipCard:hover .flipCardInner {
+  transform: rotateY(180deg);
+}
+
+.flipCardFront,
+.flipCardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.flipCardFront {
+  background: #5d0309;
+}
+
+.mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.flipCardBack {
+  background-color: #ffffff;
+  color: #1a1a1a;
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  border: 1px solid #eee;
+}
+
+.missionContent {
+  text-align: left;
+}
+
+.missionContent h3 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: #800000;
+}
+
+.missionContent p {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: #444;
+  font-style: italic;
+  margin-bottom: 2.5rem;
+}
+
+.missionFooter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 700;
+  color: #800000;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+/* Features High-Contrast */
+.featureSection {
+  padding: 12rem 0 4rem;
+}
+
+.featureTitle {
+  font-size: 4rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 8rem;
+}
+
+.featureRows {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.featureRow {
+  display: flex;
+  align-items: center;
+  gap: 6rem;
+  padding: 4rem;
+  border-radius: 50px;
+  background: #fafafa;
+  transition: all 0.4s ease;
+}
+
+.featureRow:hover {
+  background: #ffffff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+}
+
+.featureRow:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.featureIcon {
+  width: 100px;
+  height: 100px;
+  background: #800000;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.featureText h3 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+}
+
+.featureText p {
+  font-size: 1.2rem;
+  color: #666;
+  line-height: 1.7;
+}
+
+/* Redesigned Values Section - EXPLOSIVE CARDS */
+.valuesSection {
+  padding: 6rem 0 15rem;
+  background: #ffffff;
+  position: relative;
+}
+
+.valuesHeader {
+  text-align: center;
+  margin-bottom: 10rem;
+}
+
+.valuesHeader h2 {
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -2px;
+}
+
+.valuesHeader p {
+  font-size: 1.5rem;
+  color: #888;
+  margin-top: 1.5rem;
+}
+
+.valuesMosaic {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+
+.valueCard {
+  height: 500px;
+  background: #fafafa;
+  border-radius: 60px;
+  padding: 5rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  border: 1px solid #eee;
+}
+
+.valueCard:hover {
+  background: #800000;
+  border-color: #800000;
+  transform: scale(1.02);
+  box-shadow: 0 50px 100px rgba(128, 0, 0, 0.15);
+}
+
+.valueBigNumber {
+  position: absolute;
+  top: -2rem;
+  right: -2rem;
+  font-size: 20rem;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.03);
+  line-height: 1;
+  transition: all 0.6s ease;
+  pointer-events: none;
+}
+
+.valueCard:hover .valueBigNumber {
+  color: rgba(255, 255, 255, 0.05);
+  transform: translate(-2rem, 2rem);
+}
+
+.valueIconBox {
+  width: 80px;
+  height: 80px;
+  background: #ffffff;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #800000;
+  margin-bottom: 3rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.6s ease;
+}
+
+.valueCard:hover .valueIconBox {
+  /* Animation removed */
+}
+
+.valueCard h3 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  transition: all 0.6s ease;
+}
+
+.valueCard:hover h3 {
+  color: #ffffff;
+}
+
+.valueCard p {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: #666;
+  max-width: 400px;
+  transition: all 0.6s ease;
+}
+
+.valueCard:hover p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Final CTA */
+.finalCta {
+  padding-bottom: 12rem;
+}
+
+.maroonCta {
+  background: #800000;
+  height: 600px;
+  border-radius: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ffffff;
+  padding: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.maroonCta::after {
+  content: '';
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+}
+
+.maroonCta h2 {
+  font-size: 5rem;
+  font-weight: 900;
+  margin-bottom: 3rem;
+  line-height: 0.9;
+  position: relative;
+  z-index: 1;
+}
+
+.ctaBtn {
+  background: #ffffff;
+  color: #800000;
+  padding: 1.8rem 4rem;
+  border-radius: 100px;
+  font-weight: 800;
+  font-size: 1.2rem;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  z-index: 1;
+}
+
+.ctaBtn:hover {
+  transform: scale(1.1) rotate(2deg);
+}
+
+@media (max-width: 1100px) {
+
+  .storyLayout,
+  .featureRow,
+  .valuesMosaic {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .bentoGrid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+
+  .largeCard {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  .heroTitle {
+    font-size: 3.5rem;
+  }
+
+  .valueCard {
+    height: auto;
+    padding: 3rem;
+  }
+
+  .valueBigNumber {
+    font-size: 12rem;
+  }
+
+  .flipCard {
+    height: 400px;
+  }
+}
+
+@media (max-width: 600px) {
+  .heroContent {
+    padding: 2rem;
+    border-radius: 40px;
+  }
+
+  .bentoGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .largeCard {
+    grid-column: span 1;
+  }
+
+  .maroonCta h2 {
+    font-size: 3rem;
+  }
+
+  .valuesHeader h2 {
+    font-size: 3rem;
+  }
+
+  .missionContent h3 {
+    font-size: 1.75rem;
+  }
+
+  .missionContent p {
+    font-size: 1.1rem;
+  }
+}
