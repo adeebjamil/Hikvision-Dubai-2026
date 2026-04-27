@@ -46,11 +46,17 @@
 }
 
 .heroTitle {
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: clamp(2.2rem, 8vw, 4rem);
   color: #0f172a;
   line-height: 1.1;
   letter-spacing: -0.04em;
   margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2.25rem;
+  }
 }
 
 .redText {
@@ -113,6 +119,12 @@
 /* ── Zig-Zag List Section ── */
 .listSection {
   padding: 8rem 0;
+}
+
+@media (max-width: 768px) {
+  .listSection {
+    padding: 4rem 0;
+  }
 }
 
 .serviceRow {
@@ -195,9 +207,18 @@
 }
 
 .rowTitle {
-  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
   color: #0f172a;
   letter-spacing: -0.02em;
+}
+
+@media (max-width: 768px) {
+  .rowTitle {
+    font-size: 1.75rem;
+  }
+  .rowDescription {
+    font-size: 1rem;
+  }
 }
 
 .rowDescription {

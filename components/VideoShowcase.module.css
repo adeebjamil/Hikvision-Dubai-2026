@@ -5,6 +5,19 @@
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 1rem;
+  }
+  .videoWrapper {
+    border-radius: 20px;
+    padding: 0.5rem;
+  }
+  .videoGlass {
+    border-radius: 16px;
+  }
+}
+
 .backgroundGlow {
   position: absolute;
   top: -10%;

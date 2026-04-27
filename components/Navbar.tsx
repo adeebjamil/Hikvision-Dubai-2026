@@ -199,13 +199,11 @@ const Navbar = () => {
 
           {/* Centred Logo */}
           <Link href="/" className={styles.logoLink} aria-label="Hikvision Dubai – Home">
-            <Image
+            <img
               src="/logo.png"
               alt="Hikvision Dubai Logo"
-              width={240}
-              height={75}
               className={styles.logoImage}
-              priority
+              loading="eager"
             />
           </Link>
 

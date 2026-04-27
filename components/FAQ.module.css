@@ -187,7 +187,20 @@
 }
 
 @media (max-width: 1024px) {
+  .section {
+    padding: 6rem 1rem;
+  }
   .contentSide {
     position: static;
+  }
+  .title {
+    font-size: 2rem;
+  }
+  .questionBtn {
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+  .answerText {
+    padding: 0 1.5rem 1.5rem 1.5rem;
   }
 }

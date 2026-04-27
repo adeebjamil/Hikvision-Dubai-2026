@@ -6,6 +6,12 @@
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 1rem;
+  }
+}
+
 /* Subtle dot pattern background */
 .section::before {
   content: '';
@@ -61,6 +67,12 @@
   height: 100%;
   overflow: hidden;
   z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 2rem 1.5rem;
+  }
 }
 
 /* Gradient Top Highlight on Hover */

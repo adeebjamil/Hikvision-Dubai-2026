@@ -1,8 +1,14 @@
 .section {
-  padding: 10rem 1.5rem;
+  padding: 8rem 1.5rem;
   background-color: #ffffff;
   position: relative;
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 1rem;
+  }
 }
 
 /* Background Glows */
@@ -81,8 +87,14 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
   gap: 2.5rem;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    gap: 1.5rem;
+  }
 }
 
 /* ── Premium Card Design ── */
@@ -110,6 +122,13 @@
   box-shadow: 0 10px 40px -15px rgba(0, 0, 0, 0.05);
   position: relative;
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .cardInner {
+    padding: 2rem 1.5rem;
+    border-radius: 30px;
+  }
 }
 
 .cardInner::before {
@@ -198,6 +217,16 @@
   color: #0f172a;
   margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
+}
+
+@media (max-width: 768px) {
+  .productTitle {
+    font-size: 1.5rem;
+  }
+  .descriptionText {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
 }
 
 .descriptionText {

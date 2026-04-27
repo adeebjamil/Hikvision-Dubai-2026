@@ -5,6 +5,12 @@
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 1rem;
+  }
+}
+
 .container {
   max-width: var(--container-max-width, 1280px);
   margin: 0 auto;
@@ -72,11 +78,17 @@
 }
 
 .title {
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-size: clamp(2.2rem, 5vw, 4.5rem);
   color: #0f172a;
   margin-bottom: 1.5rem;
-  line-height: 1.05;
+  line-height: 1.1;
   letter-spacing: -0.02em;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
 }
 
 .accent {
@@ -149,6 +161,22 @@
   transform: translateX(15px);
   border-color: rgba(239, 68, 68, 0.2);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 640px) {
+  .card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1.5rem;
+  }
+  .iconWrapper {
+    margin-right: 0;
+    margin-bottom: 1.5rem;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+  }
 }
 
 .card:hover::before {

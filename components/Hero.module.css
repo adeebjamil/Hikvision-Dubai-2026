@@ -10,8 +10,15 @@
   align-items: center;
   background: #050002;
   overflow: hidden;
-  padding-top: var(--header-height, 138px);
-  padding-bottom: 6rem;
+  padding-top: var(--nb-total-h, 138px);
+  padding-bottom: 4rem;
+}
+
+@media (max-width: 1023px) {
+  .hero {
+    padding-top: calc(var(--nb-total-h, 100px) + 2rem);
+    padding-bottom: 3rem;
+  }
 }
 
 /* ── Background Video ── */
@@ -172,11 +179,17 @@
   display: flex;
   flex-direction: column;
   gap: 0.1em;
-  font-size: clamp(2.6rem, 5.5vw, 5rem);
+  font-size: clamp(2.2rem, 8vw, 4.5rem);
   font-weight: 900;
-  line-height: 1.05;
-  margin-bottom: 1.75rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
 }
 
 .titleLine1,
@@ -326,6 +339,18 @@
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   width: 100%;
   max-width: 900px;
+}
+
+@media (max-width: 768px) {
+  .stats {
+    gap: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-top: 2rem;
+  }
+  .statDivider {
+    display: none;
+  }
 }
 
 .statItem {

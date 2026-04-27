@@ -9,6 +9,14 @@
   --nb-total-h: calc(var(--nb-top-h) + var(--nb-main-h));
 }
 
+@media (max-width: 1023px) {
+  :root {
+    --nb-top-h: 30px;
+    --nb-main-h: 70px;
+    --nb-total-h: calc(var(--nb-top-h) + var(--nb-main-h));
+  }
+}
+
 /* ============================================================
    TOP UTILITY BAR
    ============================================================ */
@@ -19,9 +27,15 @@
   right: 0;
   height: var(--nb-top-h);
   background: var(--color-primary);
-  z-index: 1001;
+  z-index: 3001; /* Higher than header */
   display: flex;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .topBar {
+    display: none;
+  }
 }
 
 .topBarInner {
@@ -67,6 +81,16 @@
   display: flex;
   align-items: center;
   gap: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .topBarBadge, .socialLinks, .topBarDivider {
+    display: none;
+  }
+  .topBarInner {
+    justify-content: center;
+    padding: 0 1rem;
+  }
 }
 
 .topBarBadge {
@@ -124,14 +148,20 @@
   left: 0;
   right: 0;
   height: var(--nb-main-h);
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  z-index: 1000;
+  z-index: 3000; /* Higher than overlay */
   display: flex;
   align-items: center;
   transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .header {
+    top: 0;
+  }
 }
 
 .header.scrolled {
@@ -149,6 +179,12 @@
   justify-content: space-between;
   height: 100%;
   position: relative;
+}
+
+@media (max-width: 1023px) {
+  .container {
+    padding: 0 1.25rem;
+  }
 }
 
 /* ============================================================
@@ -391,6 +427,18 @@
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+@media (max-width: 1023px) {
+  .logoImage {
+    height: 50px;
+  }
+  .logoLink {
+    position: static;
+    transform: none;
+    left: auto;
+    top: auto;
+  }
+}
+
 .logoLink:hover .logoImage {
   transform: scale(1.05);
 }
@@ -430,6 +478,9 @@
   cursor: pointer;
   padding: 10px;
   z-index: 3000;
+  background: transparent;
+  border: none;
+  outline: none;
 }
 
 @media (max-width: 1023px) {
@@ -457,19 +508,24 @@
   position: fixed;
   inset: 0;
   background: #fff;
-  z-index: 2500;
-  padding: 100px 2rem;
+  z-index: 2000; /* Lower than header */
+  padding: 120px 2rem;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   gap: 2rem;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.4s ease;
+  transform: translateY(-20px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
 }
 
 .mobileOverlayOpen {
   opacity: 1;
   visibility: visible;
+  transform: translateY(0);
 }
 
 .mobileLinks {
@@ -477,12 +533,18 @@
 }
 
 .mobileLink {
-  font-size: 2.5rem;
-  font-weight: 900;
+  font-size: 1.75rem;
+  font-weight: 800;
   color: #1a1a1a;
   text-decoration: none;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   display: block;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.mobileLink:hover {
+  color: var(--color-primary);
 }
 
 .mobileCta {
