@@ -112,7 +112,7 @@ export default function AdminLogin() {
           </form>
 
           <p className={styles.hint}>
-            © 2024 Hikvision Camera Dubai. All rights reserved.
+            © 2026 Hikvision Camera Dubai. All rights reserved.
           </p>
         </div>
       </div>

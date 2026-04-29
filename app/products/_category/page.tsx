@@ -17,8 +17,9 @@ async function getCategoryData(categorySlug: string) {
   };
 }
 
-export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
-  const category = await getCategoryData(params.category);
+export async function generateMetadata({ params }: { params: Promise<{ category: string }> }): Promise<Metadata> {
+  const { category: categorySlug } = await params;
+  const category = await getCategoryData(categorySlug);
   return {
     title: `${category.name} Dubai | Authorized Hikvision Dealer UAE`,
     description: category.description,
@@ -28,8 +29,9 @@ export async function generateMetadata({ params }: { params: { category: string 
   };
 }
 
-export default async function CategoryPage({ params }: { params: { category: string } }) {
-  const category = await getCategoryData(params.category);
+export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
+  const { category: categorySlug } = await params;
+  const category = await getCategoryData(categorySlug);
 
   const jsonLdBreadcrumbs = {
     "@context": "https://schema.org",

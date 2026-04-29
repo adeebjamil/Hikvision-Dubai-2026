@@ -19,8 +19,9 @@ async function getSubcategoryData(categorySlug: string, subcategorySlug: string)
   };
 }
 
-export async function generateMetadata({ params }: { params: { category: string, subcategory: string } }): Promise<Metadata> {
-  const data = await getSubcategoryData(params.category, params.subcategory);
+export async function generateMetadata({ params }: { params: Promise<{ category: string, subcategory: string }> }): Promise<Metadata> {
+  const { category, subcategory } = await params;
+  const data = await getSubcategoryData(category, subcategory);
   return {
     title: `${data.subcategory.name} Dubai | ${data.category.name} Price UAE — Authorized Dealer`,
     description: `Shop ${data.subcategory.name} from authorized Hikvision dealer in Dubai. ${data.category.name} with official warranty. Compare specs, prices. Call +971 55 292 9644.`,
@@ -30,8 +31,9 @@ export async function generateMetadata({ params }: { params: { category: string,
   };
 }
 
-export default async function SubcategoryPage({ params }: { params: { category: string, subcategory: string } }) {
-  const data = await getSubcategoryData(params.category, params.subcategory);
+export default async function SubcategoryPage({ params }: { params: Promise<{ category: string, subcategory: string }> }) {
+  const { category, subcategory } = await params;
+  const data = await getSubcategoryData(category, subcategory);
 
   const jsonLdBreadcrumbs = {
     "@context": "https://schema.org",

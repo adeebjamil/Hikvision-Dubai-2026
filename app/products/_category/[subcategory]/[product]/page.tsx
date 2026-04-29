@@ -29,8 +29,9 @@ async function getProductData(categorySlug: string, subcategorySlug: string, pro
   };
 }
 
-export async function generateMetadata({ params }: { params: { category: string, subcategory: string, product: string } }): Promise<Metadata> {
-  const data = await getProductData(params.category, params.subcategory, params.product);
+export async function generateMetadata({ params }: { params: Promise<{ category: string, subcategory: string, product: string }> }): Promise<Metadata> {
+  const { category, subcategory, product } = await params;
+  const data = await getProductData(category, subcategory, product);
   const spec1 = data.product.specs[0].value;
   const spec2 = data.product.specs[1].value;
   const spec3 = data.product.specs[2].value;
@@ -44,8 +45,9 @@ export async function generateMetadata({ params }: { params: { category: string,
   };
 }
 
-export default async function ProductDetailPage({ params }: { params: { category: string, subcategory: string, product: string } }) {
-  const data = await getProductData(params.category, params.subcategory, params.product);
+export default async function ProductDetailPage({ params }: { params: Promise<{ category: string, subcategory: string, product: string }> }) {
+  const { category, subcategory, product } = await params;
+  const data = await getProductData(category, subcategory, product);
 
   const jsonLdBreadcrumbs = {
     "@context": "https://schema.org",
