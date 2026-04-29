@@ -1,67 +1,260 @@
-import type { Metadata } from 'next';
-import { ShieldCheck, Award, MapPin } from 'lucide-react';
+"use client";
 
-export const metadata: Metadata = {
-  title: 'About Lovosis',
-  description: 'Learn about Lovosis, your trusted Authorized Hikvision Partner in Dubai. Discover our expert team and authorized dealer credentials.',
-  alternates: {
-    canonical: 'https://dubai-hikvision.com/about',
-  },
-};
+import React from 'react';
+import { Outfit } from 'next/font/google';
+import { 
+  ShieldCheck, 
+  Target, 
+  Users, 
+  Award, 
+  Zap, 
+  Heart,
+  Quote,
+  ArrowRight,
+  CheckCircle2,
+  Package,
+  HardDrive,
+  Camera,
+  Cpu,
+  Handshake,
+  TrendingUp,
+  Star,
+  Monitor,
+  Globe,
+  Siren,
+  GanttChart,
+  Lightbulb,
+  Workflow,
+  ShieldAlert,
+  Medal
+} from 'lucide-react';
+import Link from 'next/link';
+import Image from 'next/image';
+import styles from './about.module.css';
+
+const outfit = Outfit({ subsets: ['latin'], weight: ['600', '700', '800', '900'] });
 
 export default function AboutPage() {
   return (
-    <article className="min-h-screen bg-gray-50 py-16 px-4">
-      <div className="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-xl shadow-sm border border-gray-100">
-        <header className="mb-10 text-center">
-          <h1 className="text-4xl font-extrabold text-gray-900 mb-4">About Lovosis</h1>
-          <p className="text-xl text-gray-600">The Leading Authorized Hikvision Partner in Dubai</p>
-        </header>
+    <>
+      {/* Pure Image Hero */}
+      <section className={styles.hero}>
+        <div className={styles.heroBackground}>
+          <Image 
+            src="/abouthero.png" 
+            alt="Dubai Skyline" 
+            fill
+            priority
+          />
+        </div>
+      </section>
 
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">Our Story & Mission</h2>
-          <p className="text-gray-700 leading-relaxed mb-4">
-            Lovosis is a premier provider of professional security and surveillance solutions in the UAE. As an officially <strong>Authorized Hikvision Partner</strong>, we are dedicated to delivering genuine products, expert installation, and comprehensive technical support to businesses and homeowners across Dubai.
-          </p>
-          <p className="text-gray-700 leading-relaxed">
-            Our mission is to safeguard our community by providing state-of-the-art Hikvision technologies—from Network Cameras and NVRs to advanced Access Control systems.
-          </p>
-        </section>
+      {/* Brand Intro Section */}
+      <section className={styles.introSection}>
+        <div className={styles.container}>
+          <div className={styles.introContent}>
+            <div className={styles.introBadge}>
+              <Monitor size={20} />
+              <span>Next-Gen Security</span>
+            </div>
+            <h1 className={`${styles.introTitle} ${outfit.className}`}>
+              Dubai <span style={{ color: '#800000' }}>Hikvision</span>
+            </h1>
+            <p className={styles.mainDescription}>
+              Looking for premium Hikvision CCTV cameras in Dubai? Hikvision Dubai offers high-quality 
+              surveillance solutions, including DVRs, NVRs, IP cameras, and advanced security 
+              systems for homes and businesses. Experience reliable performance with every Hikvision product.
+            </p>
+          </div>
+        </div>
+      </section>
 
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">Trust & Credentials (E-E-A-T)</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-            <div className="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg">
-              <ShieldCheck className="text-red-600 mb-3" size={40} />
-              <h3 className="font-bold text-gray-900">Authorized Dealer</h3>
-              <p className="text-sm text-gray-600 mt-2">Verified partnership with Hikvision global, ensuring 100% authentic equipment.</p>
+      {/* Bento Stats Section */}
+      <section className={styles.statsSection}>
+        <div className={styles.container}>
+          <div className={styles.bentoGrid}>
+            <div className={`${styles.bentoItem} ${styles.largeCard}`}>
+              <div className={styles.statValue}>5,000+</div>
+              <div className={styles.statDesc}>Global Clients Secured</div>
+              <p style={{ marginTop: '2rem', opacity: 0.8, fontSize: '1.2rem', lineHeight: 1.6 }}>
+                Our footprint spans across industries, from luxury residential towers 
+                to mission-critical infrastructure in the heart of the UAE.
+              </p>
             </div>
-            <div className="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg">
-              <Award className="text-red-600 mb-3" size={40} />
-              <h3 className="font-bold text-gray-900">Expert Team</h3>
-              <p className="text-sm text-gray-600 mt-2">Highly trained technicians offering professional system design and deployment.</p>
+            <div className={styles.bentoItem}>
+              <div className={styles.statValue}>10+</div>
+              <div className={styles.statDesc}>Years Expertise</div>
             </div>
-            <div className="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg">
-              <MapPin className="text-red-600 mb-3" size={40} />
-              <h3 className="font-bold text-gray-900">Local UAE Support</h3>
-              <p className="text-sm text-gray-600 mt-2">Dedicated local warranty and technical assistance for all our clients in Dubai.</p>
+            <div className={styles.bentoItem}>
+              <div className={styles.statValue}>100%</div>
+              <div className={styles.statDesc}>SIRA Compliance</div>
+            </div>
+            <div className={styles.bentoItem} style={{ gridColumn: 'span 2', background: '#fafafa' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+                <Award size={60} color="#800000" />
+                <div>
+                  <div style={{ fontWeight: 800, fontSize: '1.5rem' }}>Leading Wholesaler</div>
+                  <div style={{ color: '#666' }}>The UAE's most trusted source for Hikvision hardware.</div>
+                </div>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">Our Team & Authorship</h2>
-          <div className="bg-red-50 p-6 rounded-lg border border-red-100 flex items-center gap-4">
-            <div className="w-16 h-16 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-xl flex-shrink-0">
-              L
+      {/* Immersive Dark Story with FLIP CARD */}
+      <section className={styles.immersiveStory}>
+        <div className={styles.container}>
+          <div className={styles.storyLayout}>
+            <div className={styles.textSection}>
+              <h2 className={outfit.className}>Redefining <br />Surveillance</h2>
+              <p>
+                In a city that never stops moving, we provide the vision that never blinks. 
+                Dubai Hikvision was born from a passion for safety and a commitment to 
+                technological excellence.
+              </p>
+              <p>
+                Today, we are more than a supplier. We are an innovation partner, 
+                working at the intersection of AI, thermal imaging, and cloud-integrated 
+                security to create environments where people feel truly safe.
+              </p>
             </div>
-            <div>
-              <h3 className="font-bold text-gray-900 text-lg">The Lovosis Security Team</h3>
-              <p className="text-gray-700">Content and configurations curated by certified Hikvision professionals with years of field experience in the UAE.</p>
+            <div className={styles.imageShowcase}>
+              <div className={styles.flipCard}>
+                <div className={styles.flipCardInner}>
+                  <div className={styles.flipCardFront}>
+                    <Image 
+                      src="/about1.png" 
+                      alt="Security Installation" 
+                      width={800} 
+                      height={1000} 
+                      className={styles.mainImage}
+                    />
+                  </div>
+                  <div className={styles.flipCardBack}>
+                    <div className={styles.missionContent}>
+                      <Quote size={60} color="#800000" style={{ marginBottom: '2rem', opacity: 0.3 }} />
+                      <h3 className={outfit.className}>Our Core Mission</h3>
+                      <p>
+                        "To build a safer Dubai through the power of intelligent vision and 
+                        unwavering reliability."
+                      </p>
+                      <div className={styles.missionFooter}>
+                        <CheckCircle2 size={24} color="#800000" />
+                        <span>Committed to Excellence</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </section>
-      </div>
-    </article>
+        </div>
+      </section>
+
+      {/* Bento Features Grid */}
+      <section className={styles.featureSection}>
+        <div className={styles.container}>
+          <h2 className={`${styles.featureTitle} ${outfit.className}`}>Why Choose Us</h2>
+          <div className={styles.featureRows}>
+            <div className={styles.featureRow}>
+              <div className={styles.featureIcon}>
+                <Camera size={40} />
+              </div>
+              <div className={styles.featureText}>
+                <h3>High-Definition Precision</h3>
+                <p>Our cameras capture every detail with 4K clarity, smart motion detection, and advanced night vision technology.</p>
+              </div>
+            </div>
+            
+            <div className={styles.featureRow}>
+              <div className={styles.featureIcon}>
+                <HardDrive size={40} />
+              </div>
+              <div className={styles.featureText}>
+                <h3>Robust Storage Solutions</h3>
+                <p>From high-capacity NVRs to redundant cloud storage, your data is always secure and accessible.</p>
+              </div>
+            </div>
+
+            <div className={styles.featureRow}>
+              <div className={styles.featureIcon}>
+                <Siren size={40} />
+              </div>
+              <div className={styles.featureText}>
+                <h3>SIRA Approved Support</h3>
+                <p>Full compliance with Dubai's security laws, backed by expert advice and professional installation services.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* EXPLOSIVE OUR VALUES SECTION */}
+      <section className={styles.valuesSection}>
+        <div className={styles.container}>
+          <div className={styles.valuesHeader}>
+            <h2 className={outfit.className}>Our Values</h2>
+            <p>The foundations of our excellence.</p>
+          </div>
+          
+          <div className={styles.valuesMosaic}>
+            <div className={styles.valueCard}>
+              <span className={styles.valueBigNumber}>01</span>
+              <div className={styles.valueIconBox}>
+                <Lightbulb size={32} />
+              </div>
+              <h3 className={outfit.className}>Innovation</h3>
+              <p>Pushing the boundaries of intelligent security to protect your future.</p>
+            </div>
+
+            <div className={styles.valueCard}>
+              <span className={styles.valueBigNumber}>02</span>
+              <div className={styles.valueIconBox}>
+                <Workflow size={32} />
+              </div>
+              <h3 className={outfit.className}>Collaboration</h3>
+              <p>Working together to build tailored safety ecosystems that meet your specific needs.</p>
+            </div>
+
+            <div className={styles.valueCard}>
+              <span className={styles.valueBigNumber}>03</span>
+              <div className={styles.valueIconBox}>
+                <ShieldAlert size={32} />
+              </div>
+              <h3 className={outfit.className}>Reliability</h3>
+              <p>Dependable performance in Dubai's harshest environments, 24/7/365.</p>
+            </div>
+
+            <div className={styles.valueCard}>
+              <span className={styles.valueBigNumber}>04</span>
+              <div className={styles.valueIconBox}>
+                <Medal size={32} />
+              </div>
+              <h3 className={outfit.className}>Excellence</h3>
+              <p>Setting the gold standard in every installation and customer service interaction.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final High-Contrast CTA */}
+      <section className={styles.finalCta}>
+        <div className={styles.container}>
+          <div className={styles.maroonCta}>
+            <h2 className={outfit.className}>
+              Secure Your <br />
+              Future Today
+            </h2>
+            <p style={{ fontSize: '1.5rem', opacity: 0.8, marginBottom: '4rem', maxWidth: '600px' }}>
+              Join the 5,000+ businesses and homeowners who trust Dubai Hikvision for their safety.
+            </p>
+            <Link href="/contact" className={styles.ctaBtn}>
+              Get an Expert Quote <ArrowRight size={24} style={{ marginLeft: '1rem' }} />
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

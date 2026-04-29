@@ -1,107 +1,152 @@
-import type { Metadata } from 'next';
-import Script from 'next/script';
-import { ShieldCheck } from 'lucide-react';
+"use client";
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const titleSlug = params.slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-  return {
-    title: `${titleSlug} | Hikvision Dubai`,
-    description: `Buy authentic Hikvision ${titleSlug} from Lovosis, the authorized Hikvision partner in Dubai. Professional installation and official UAE warranty.`,
-    alternates: {
-      canonical: `https://dubai-hikvision.com/products/${params.slug}`,
-    },
-  };
-}
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
+import Link from 'next/link';
+import { ArrowLeft, ArrowRight, Camera, ShieldCheck, Box, ChevronRight } from 'lucide-react';
+import styles from './subcategory.module.css';
+import { Outfit } from 'next/font/google';
 
-export default function ProductPage({ params }: { params: { slug: string } }) {
-  const productName = params.slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+const outfit = Outfit({ subsets: ['latin'], weight: ['400', '600', '700', '800', '900'] });
+
+export default function SubCategoryPage() {
+  const params = useParams();
+  const slug = params.slug;
   
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": `Hikvision ${productName}`,
-    "description": `Professional Hikvision ${productName} supplied by Lovosis, authorized partner in Dubai.`,
-    "brand": {
-      "@type": "Brand",
-      "name": "Hikvision"
-    },
-    "offers": {
-      "@type": "Offer",
-      "priceCurrency": "AED",
-      "availability": "https://schema.org/InStock",
-      "seller": {
-        "@type": "Organization",
-        "name": "Lovosis - Authorized Hikvision Partner"
+  const [category, setCategory] = useState<any>(null);
+  const [subCategories, setSubCategories] = useState<any[]>([]);
+  const [filteredSubCategories, setFilteredSubCategories] = useState<any[]>([]);
+  const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!slug) return;
+
+    const fetchData = async () => {
+      try {
+        // 1. Fetch category details to get the name/hero info
+        const catRes = await fetch('/api/categories');
+        const catJson = await catRes.json();
+        if (catJson.success) {
+          const foundCat = catJson.data.find((c: any) => c.slug === slug);
+          setCategory(foundCat);
+        }
+
+        // 2. Fetch sub-categories for this slug
+        const subRes = await fetch(`/api/sub-categories?cat=${slug}`);
+        const subJson = await subRes.json();
+        if (subJson.success) {
+          setSubCategories(subJson.data);
+          setFilteredSubCategories(subJson.data);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
-    }
-  };
+    };
+
+    fetchData();
+  }, [slug]);
+
+  useEffect(() => {
+    const filtered = subCategories.filter(sub => 
+      sub.name.toLowerCase().includes(search.toLowerCase())
+    );
+    setFilteredSubCategories(filtered);
+  }, [search, subCategories]);
+
+  if (loading) {
+    return (
+      <div className={`${styles.main} ${outfit.className}`}>
+        <div style={{ textAlign: 'center', padding: '15rem 0', color: '#666' }}>
+          <div className="loading-spinner" />
+          <p style={{ marginTop: '1rem', fontWeight: 600 }}>Loading professional solutions...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!category && !loading) {
+    return (
+      <div className={`${styles.main} ${outfit.className}`}>
+        <div style={{ textAlign: 'center', padding: '10rem 0' }}>
+          <h2>Category Not Found</h2>
+          <Link href="/products" style={{ color: '#800000', fontWeight: 700 }}>Return to all products</Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <article className="min-h-screen bg-white py-16 px-4">
-      <Script
-        id={`product-schema-${params.slug}`}
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <div className="max-w-5xl mx-auto">
-        <header className="mb-8 border-b pb-8">
-          <div className="flex items-center gap-3 text-red-600 font-bold mb-4">
-            <ShieldCheck size={24} />
-            <span>AUTHORIZED HIKVISION PARTNER</span>
+    <div className={`${styles.main} ${outfit.className}`}>
+      {/* ── Hero Section ── */}
+      <section className={styles.hero}>
+        <div className={styles.heroOverlay} />
+        <div className={styles.heroContent}>
+          <div className={styles.heroBadge}>
+            <Link href="/" style={{ color: 'inherit' }}>Home</Link>
+            <ChevronRight size={14} />
+            <Link href="/products" style={{ color: 'inherit' }}>Products</Link>
+            <ChevronRight size={14} />
+            <span>{category?.name}</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">Hikvision {productName}</h1>
-          <p className="text-xl text-gray-600">High-performance security hardware for reliable surveillance and access control in the UAE.</p>
-        </header>
+          <h1 className={styles.heroTitle}>{category?.name}</h1>
+          <p className={styles.heroSubtitle}>
+            Specialized {category?.name} hardware designed for mission-critical surveillance and security.
+          </p>
+        </div>
+      </section>
 
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
-          <div className="bg-gray-50 aspect-video rounded-xl flex items-center justify-center border border-gray-200">
-            <span className="text-gray-400 font-medium">Product Image Placeholder</span>
-          </div>
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Product Overview</h2>
-            <p className="text-gray-700 leading-relaxed mb-6">
-              The Hikvision {productName} offers industry-leading performance tailored for modern security needs. 
-              Sourced directly from the manufacturer, Lovosis guarantees authenticity and provides local technical support in Dubai.
-            </p>
-            <h3 className="text-xl font-bold text-gray-900 mb-3">Key Features:</h3>
-            <ul className="list-disc list-inside text-gray-700 space-y-2 mb-8">
-              <li>Advanced Hikvision imaging/processing technology</li>
-              <li>Robust build quality for 24/7 operation</li>
-              <li>Seamless integration with existing infrastructure</li>
-              <li>Covered by official UAE warranty</li>
-            </ul>
-            <a href="mailto:sales@lovosis.com" className="inline-block bg-red-600 text-white px-8 py-3 rounded-md font-bold hover:bg-red-700 transition">
-              Request a Quote
-            </a>
-          </div>
-        </section>
+      {/* ── Filter Bar ── */}
+      <section className={styles.filterBar}>
+        <div className={styles.filterInfo}>
+          <Box size={20} color="#800000" />
+          <span>{category?.name} Series</span>
+          <span className={styles.filterBadge}>{filteredSubCategories.length} Items</span>
+        </div>
+        <div className={styles.searchBox}>
+          <Camera size={18} color="#999" />
+          <input 
+            type="text" 
+            placeholder={`Search in ${category?.name}...`} 
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+      </section>
 
-        <section className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
-          <h2 className="text-2xl font-bold text-gray-900 p-6 border-b bg-gray-50">Technical Specifications</h2>
-          <div className="p-0 overflow-x-auto">
-            <table className="w-full text-left border-collapse min-w-[500px]">
-              <tbody>
-                <tr className="border-b border-gray-100">
-                  <th className="py-4 px-6 bg-gray-50 text-gray-900 font-semibold w-1/3">Brand</th>
-                  <td className="py-4 px-6 text-gray-700">Hikvision</td>
-                </tr>
-                <tr className="border-b border-gray-100">
-                  <th className="py-4 px-6 bg-gray-50 text-gray-900 font-semibold w-1/3">Category</th>
-                  <td className="py-4 px-6 text-gray-700">{productName}</td>
-                </tr>
-                <tr className="border-b border-gray-100">
-                  <th className="py-4 px-6 bg-gray-50 text-gray-900 font-semibold w-1/3">Availability</th>
-                  <td className="py-4 px-6 text-gray-700">In Stock (Dubai)</td>
-                </tr>
-                <tr>
-                  <th className="py-4 px-6 bg-gray-50 text-gray-900 font-semibold w-1/3">Warranty</th>
-                  <td className="py-4 px-6 text-gray-700">Official UAE Manufacturer Warranty</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </div>
-    </article>
+      {/* ── Sub-Category Grid ── */}
+      <section className={styles.section}>
+        <div className={styles.grid}>
+          {filteredSubCategories.length > 0 ? (
+            filteredSubCategories.map((sub) => (
+              <div key={sub._id} className={styles.card}>
+                <div className={styles.imageWrapper}>
+                  {sub.image ? (
+                    <img src={sub.image} alt={sub.name} />
+                  ) : (
+                    <Camera size={64} color="#ddd" />
+                  )}
+                </div>
+                <h3 className={styles.subName}>{sub.name}</h3>
+                <p className={styles.subDesc}>
+                  Professional grade {sub.name} solutions with advanced analytics and high-definition imaging.
+                </p>
+                <Link href={`/products/${slug}/${sub.slug}`} className={styles.viewProducts}>
+                  View Product Series <ArrowRight size={16} />
+                </Link>
+              </div>
+            ))
+          ) : (
+            <div style={{ gridColumn: '1/-1', textAlign: 'center', padding: '5rem 0', color: '#666' }}>
+              <Box size={48} color="#ddd" style={{ marginBottom: '1rem' }} />
+              <h3>No Series found matching "{search}"</h3>
+              <p>Try searching for a different keyword or security solution.</p>
+            </div>
+          )}
+        </div>
+      </section>
+    </div>
   );
 }

@@ -1,60 +1,122 @@
-import type { Metadata } from 'next';
+"use client";
+
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ShieldCheck } from 'lucide-react';
+import { ArrowRight, Box, Camera, ShieldCheck, Monitor, Cpu, BellRing, DoorOpen } from 'lucide-react';
+import styles from './products.module.css';
+import { Outfit } from 'next/font/google';
 
-export const metadata: Metadata = {
-  title: 'Hikvision Products & Solutions',
-  description: 'Explore our complete range of Hikvision products including Network Cameras, DVR, NVR, TurboHD, and Access Control. Authorized dealer in Dubai.',
-  alternates: {
-    canonical: 'https://dubai-hikvision.com/products',
-  },
-};
-
-const categories = [
-  { id: 'network-cameras', name: 'Network Cameras', desc: 'IP Cameras with ColorVu & AcuSense' },
-  { id: 'nvr', name: 'Network Video Recorders (NVR)', desc: 'High-performance IP recording' },
-  { id: 'dvr', name: 'Digital Video Recorders (DVR)', desc: 'Seamless analog HD surveillance' },
-  { id: 'turbohd', name: 'TurboHD Cameras', desc: 'High-definition analog cameras' },
-  { id: 'access-control', name: 'Access Control', desc: 'Biometric and card readers' },
-  { id: 'video-intercom', name: 'Video Intercom', desc: 'Smart communication systems' }
-];
+const outfit = Outfit({ subsets: ['latin'], weight: ['400', '600', '700', '800', '900'] });
 
 export default function ProductsPage() {
+  const [categories, setCategories] = useState<any[]>([]);
+  const [filteredCategories, setFilteredCategories] = useState<any[]>([]);
+  const [search, setSearch] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch('/api/categories');
+        const json = await res.json();
+        if (json.success) {
+          setCategories(json.data);
+          setFilteredCategories(json.data);
+        }
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const filtered = categories.filter(cat => 
+      cat.name.toLowerCase().includes(search.toLowerCase())
+    );
+    setFilteredCategories(filtered);
+  }, [search, categories]);
+
   return (
-    <article className="min-h-screen bg-white py-16 px-4">
-      <div className="max-w-6xl mx-auto">
-        <header className="mb-12 text-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">Hikvision Security Products</h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Browse our comprehensive selection of genuine Hikvision hardware. We are an <strong>Authorized Hikvision Partner</strong> supplying to Dubai, UAE.
-          </p>
-        </header>
+    <div className={`${styles.main} ${outfit.className}`}>
+      {/* ── Hero Section ── */}
+      <section className={styles.hero}>
+        <div className={styles.heroOverlay} />
+        <div className={styles.heroContent}>
+          <span className={styles.heroBadge}>Authorized Hikvision Partner</span>
+          <h1 className={styles.heroTitle}>Premium Security Solutions</h1>
+          <p className={styles.heroSubtitle}>Explore the complete range of Hikvision technology for every environment and requirement.</p>
+        </div>
+      </section>
 
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {categories.map((cat) => (
-            <Link href={`/products/${cat.id}`} key={cat.id} className="group border border-gray-200 rounded-xl p-6 hover:shadow-lg hover:border-red-600 transition block">
-              <div className="flex items-center gap-3 mb-4">
-                <ShieldCheck className="text-red-600" size={28} />
-                <h2 className="text-2xl font-bold text-gray-900 group-hover:text-red-600 transition">{cat.name}</h2>
-              </div>
-              <p className="text-gray-600 mb-6">{cat.desc}</p>
-              <div className="text-sm font-bold text-red-600 flex items-center gap-2">
-                View Specifications <span aria-hidden="true">&rarr;</span>
-              </div>
-            </Link>
-          ))}
-        </section>
+      {/* ── Filter Bar ── */}
+      <section className={styles.filterBar}>
+        <div className={styles.filterInfo}>
+          <Box size={20} color="#800000" />
+          <span>All Categories</span>
+          <span className={styles.filterBadge}>{filteredCategories.length} Items</span>
+        </div>
+        <div className={styles.searchBox}>
+          <Camera size={18} color="#999" />
+          <input 
+            type="text" 
+            placeholder="Search categories..." 
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+      </section>
 
-        <section className="mt-16 bg-gray-50 p-8 rounded-xl border border-gray-200">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Why Buy From Lovosis?</h2>
-          <ul className="list-disc list-inside text-gray-700 space-y-2">
-            <li>100% Genuine Hikvision equipment directly from the manufacturer.</li>
-            <li>Official UAE warranty on all hardware components.</li>
-            <li>Expert consultation to match the right product to your security needs.</li>
-            <li>Professional installation services available across Dubai.</li>
-          </ul>
-        </section>
-      </div>
-    </article>
+      {/* ── Products/Categories Grid ── */}
+      <section className={styles.section}>
+        {loading ? (
+          <div style={{ textAlign: 'center', padding: '10rem 0', color: '#666' }}>
+            <div className="loading-spinner" />
+            <p style={{ marginTop: '1rem', fontWeight: 600 }}>Curating professional solutions...</p>
+          </div>
+        ) : (
+          <div className={styles.grid}>
+            {filteredCategories.length > 0 ? (
+              filteredCategories.map((cat) => (
+                <Link 
+                  key={cat._id} 
+                  href={`/products/${cat.slug}`} 
+                  className={styles.card}
+                >
+                  <div className={styles.cardImage}>
+                    {cat.image ? (
+                      <img src={cat.image} alt={cat.name} />
+                    ) : (
+                      <div style={{ width: '100%', height: '100%', background: '#f5f5f5', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <Camera size={80} color="#eee" />
+                      </div>
+                    )}
+                    <div className={styles.cardOverlay}>
+                      <span className={styles.categoryTag}>
+                        <ShieldCheck size={14} />
+                        Enterprise Grade
+                      </span>
+                      <h3 className={styles.cardName}>{cat.name}</h3>
+                      <p className={styles.cardDesc}>High-performance surveillance hardware optimized for professional security environments.</p>
+                      <div className={styles.viewBtn}>
+                        View ProductSeries <ArrowRight size={20} />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))
+            ) : (
+              <div style={{ gridColumn: '1/-1', textAlign: 'center', padding: '5rem 0', color: '#666' }}>
+                <Box size={48} color="#ddd" style={{ marginBottom: '1rem' }} />
+                <h3>No categories found matching "{search}"</h3>
+                <p>Try searching for a different keyword or security solution.</p>
+              </div>
+            )}
+          </div>
+        )}
+      </section>
+    </div>
   );
 }
